@@ -1,0 +1,28 @@
+[Unit]
+Description=osqueryd
+After=network.target
+
+[Service]
+
+# Twitter API configuration for the distributed plugin.
+# https://apps.twitter.com/app/new
+# Example bot at https://twitter.com/querygopher
+Environment=TWITTER_CONSUMER_KEY=secret
+Environment=TWITTER_CONSUMER_SECRET=secret
+Environment=TWITTER_ACCESS_TOKEN=secret
+Environment=TWITTER_ACCESS_TOKEN_SECRET=sercret
+
+# Config plugin configuration. Uses a gist id.
+Environment=OSQUERY_CONFIG_GIST=sercret
+
+ExecStart=/usr/bin/osqueryd \
+		--extensions_autoload=/etc/osquery/extensions.load \
+		--logger_plugin=journal \
+		--config_plugin=gist \
+		--disable_distributed=false \
+		--distributed_plugin=twitter \
+		--distributed_interval=10 
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

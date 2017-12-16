@@ -1,0 +1,4 @@
+go-extension-tutorial
+vendor/
+build/
+*.ext
