@@ -5,12 +5,9 @@ import (
 	"log"
 	"time"
 
-	osquery "github.com/kolide/osquery-go"
-
 	"github.com/kolide/go-extension-tutorial/pkg/gist"
-	"github.com/kolide/go-extension-tutorial/pkg/journal"
-	"github.com/kolide/go-extension-tutorial/pkg/systemd"
 	"github.com/kolide/go-extension-tutorial/pkg/twitter"
+	osquery "github.com/kolide/osquery-go"
 )
 
 func main() {
@@ -35,17 +32,6 @@ func main() {
 		log.Fatalf("Error creating extension: %s\n", err)
 	}
 
-	// create and register the systemd table plugin.
-	systemdPlugin, err := systemd.New()
-	if err != nil {
-		log.Fatalf("Error creating systemd plugin: %s\n", err)
-	}
-	server.RegisterPlugin(systemdPlugin.Table())
-
-	// create and register the journal logger plugin.
-	journalLogger := journal.New()
-	server.RegisterPlugin(journalLogger)
-
 	// create and register the twitter distributed plugin.
 	// requires the configuration to be passed through env vars.
 	twitterPlugin, err := twitter.New()
@@ -54,12 +40,14 @@ func main() {
 	}
 	go twitterPlugin.Run()
 	defer twitterPlugin.Stop()
-
 	server.RegisterPlugin(twitterPlugin.Distributed())
 
 	// create and register gist config plugin.
 	// requires configuration to be available through environment variables.
 	server.RegisterPlugin(gist.New())
+
+	// register additional plugins which can only exist for a speciffic platform.
+	registerPlatformPlugins(server)
 
 	// run the extension server
 	log.Fatal(server.Run())
