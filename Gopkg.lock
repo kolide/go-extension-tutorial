@@ -38,7 +38,10 @@
 
 [[projects]]
   name = "github.com/coreos/go-systemd"
-  packages = ["dbus","journal"]
+  packages = [
+    "dbus",
+    "journal"
+  ]
   revision = "d2196463941895ee908e13531a23a39feb9e1243"
   version = "v15"
 
@@ -61,6 +64,24 @@
   revision = "4cff9ef7b7003713efa191899dbaab8fa75e3e73"
 
 [[projects]]
+  name = "github.com/go-kit/kit"
+  packages = ["log"]
+  revision = "ca4112baa34cb55091301bdc13b1420a122b1b9e"
+  version = "v0.7.0"
+
+[[projects]]
+  name = "github.com/go-logfmt/logfmt"
+  packages = ["."]
+  revision = "390ab7935ee28ec6b286364bba9b4dd6410cb3d5"
+  version = "v0.3.0"
+
+[[projects]]
+  name = "github.com/go-stack/stack"
+  packages = ["."]
+  revision = "259ab82a6cad3992b4e21ff5cac294ccb06474bc"
+  version = "v1.7.0"
+
+[[projects]]
   name = "github.com/godbus/dbus"
   packages = ["."]
   revision = "a389bdde4dd695d414e47b755e95e72b7826432c"
@@ -80,9 +101,29 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/groob/plist"
+  packages = ["."]
+  revision = "dd56909aee38bb3860460e3e1ca8a4270c04ce15"
+
+[[projects]]
+  branch = "master"
   name = "github.com/kolide/osquery-go"
-  packages = [".","gen/osquery","plugin/config","plugin/distributed","plugin/logger","plugin/table","transport"]
+  packages = [
+    ".",
+    "gen/osquery",
+    "plugin/config",
+    "plugin/distributed",
+    "plugin/logger",
+    "plugin/table",
+    "transport"
+  ]
   revision = "77394894ef63b4ea25e1c0c4f8a8b3d1919e1aa6"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/kr/logfmt"
+  packages = ["."]
+  revision = "b84e30acd515aadc4b783ad4ff83aff3299bdfe0"
 
 [[projects]]
   name = "github.com/pkg/errors"
@@ -99,12 +140,15 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = ["unix","windows"]
+  packages = [
+    "unix",
+    "windows"
+  ]
   revision = "d5840adf789d732bc8b00f37b26ca956a7cc8e79"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f37b748521d538eb6a9c7c13b87307ba0ec21db2e275ebb9fb20cfd3033ac5b3"
+  inputs-digest = "319f4128dd3dd3dd7449e694466c66b312239e30dbab7910f78d4f65adce902c"
   solver-name = "gps-cdcl"
   solver-version = 1
